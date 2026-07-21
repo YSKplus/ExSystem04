@@ -1,138 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音刺激評価実験</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
     <div class="container">
-      <!-- Name Input Screen -->
-      <div id="nameInputScreen" class="screen active">
-        <div class="form-container">
-          <h1>音刺激評価実験</h1>
-          <p class="subtitle">参加者情報の入力</p>
-          <div class="form-group">
-            <label for="participantName">氏名:</label>
-            <input
-              type="text"
-              id="participantName"
-              placeholder="参加者の氏名を入力してください"
-              autofocus
-            />
-          </div>
-          <button
-            id="startButton"
-            class="btn btn-primary"
-            onclick="startExperiment()"
-          >
-            開始
-          </button>
-        </div>
-      </div>
-
-      <!-- Evaluation Screen -->
-      <div id="evaluationScreen" class="screen">
-        <div class="header">
-          <div class="progress-info">
-            <p id="progressText">準備中...</p>
-          </div>
-        </div>
-
-        <div class="instruction">
-          <p>再生される音刺激のパリパリ感を評価してください</p>
-        </div>
-
-        <div class="evaluation-container">
-          <div class="audio-controls">
-            <button id="playButton" class="btn btn-play" onclick="playAudio()">
-              <span class="icon">▶</span> 再生
-            </button>
-            <div id="statusText" class="status-text">
-              クリックして再生してください
+        <!-- Name Input Screen -->
+        <div id="nameInputScreen" class="screen active">
+            <div class="form-container">
+                <h1>音刺激評価実験</h1>
+                <p class="subtitle">参加者情報の入力</p>
+                <div class="form-group">
+                    <label for="participantName">氏名:</label>
+                    <input type="text" id="participantName" placeholder="参加者の氏名を入力してください" autofocus>
+                </div>
+                <button id="startButton" class="btn btn-primary" onclick="startExperiment()">開始</button>
             </div>
-          </div>
+        </div>
 
-          <div class="evaluation-buttons">
-            <p class="evaluation-instruction">評価を選択してください:</p>
-            <div class="rating-grid">
-              <button class="btn btn-rating" onclick="submitEvaluation(1)">
-                <span class="number">1</span>
-                <span class="label">非常に弱い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(2)">
-                <span class="number">2</span>
-                <span class="label">とても弱い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(3)">
-                <span class="number">3</span>
-                <span class="label">やや弱い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(4)">
-                <span class="number">4</span>
-                <span class="label">わずかに弱い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(5)">
-                <span class="number">5</span>
-                <span class="label">どちらでもない</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(6)">
-                <span class="number">6</span>
-                <span class="label">やや強い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(7)">
-                <span class="number">7</span>
-                <span class="label">かなり強い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(8)">
-                <span class="number">8</span>
-                <span class="label">とても強い</span>
-              </button>
-              <button class="btn btn-rating" onclick="submitEvaluation(9)">
-                <span class="number">9</span>
-                <span class="label">非常に強い</span>
-              </button>
+        <!-- Evaluation Screen -->
+        <div id="evaluationScreen" class="screen">
+            <div class="header">
+                <div class="progress-info">
+                    <p id="progressText">準備中...</p>
+                </div>
             </div>
-          </div>
 
-          <div class="repeat-button-container">
-            <button
-              id="repeatButton"
-              class="btn btn-repeat"
-              onclick="repeatAudio()"
-            >
-              <span class="icon">↻</span> リピート
-            </button>
-          </div>
+            <div class="instruction">
+                <p>再生される音刺激のパリパリ感を評価してください</p>
+            </div>
+
+            <div class="evaluation-container">
+                <div class="audio-controls">
+                    <audio id="audioPlayer" controls>
+                        お使いのブラウザはHTML5 audio要素をサポートしていません。
+                    </audio>
+                    <div id="statusText" class="status-text"></div>
+                </div>
+
+                <div class="evaluation-buttons">
+                    <p class="evaluation-instruction">評価を選択してください:</p>
+                    <div class="rating-grid">
+                        <button class="btn btn-rating" onclick="submitEvaluation(1)" disabled>
+                            <span class="number">1</span>
+                            <span class="label">非常に弱い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(2)" disabled>
+                            <span class="number">2</span>
+                            <span class="label">とても弱い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(3)" disabled>
+                            <span class="number">3</span>
+                            <span class="label">やや弱い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(4)" disabled>
+                            <span class="number">4</span>
+                            <span class="label">わずかに弱い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(5)" disabled>
+                            <span class="number">5</span>
+                            <span class="label">どちらでもない</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(6)" disabled>
+                            <span class="number">6</span>
+                            <span class="label">やや強い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(7)" disabled>
+                            <span class="number">7</span>
+                            <span class="label">かなり強い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(8)" disabled>
+                            <span class="number">8</span>
+                            <span class="label">とても強い</span>
+                        </button>
+                        <button class="btn btn-rating" onclick="submitEvaluation(9)" disabled>
+                            <span class="number">9</span>
+                            <span class="label">非常に強い</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="exitButton" class="btn btn-exit" onclick="exitExperiment()">途中終了</button>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Completion Screen -->
-      <div id="completionScreen" class="screen">
-        <div class="completion-container">
-          <h2>評価完了</h2>
-          <p>すべての音刺激の評価が完了しました。</p>
-          <p>結果をExcelで出力します...</p>
-          <div id="completionMessage" class="completion-message"></div>
-          <button
-            id="downloadButton"
-            class="btn btn-primary"
-            onclick="downloadResults()"
-            style="display: none"
-          >
-            結果をダウンロード
-          </button>
+        <!-- Completion Screen -->
+        <div id="completionScreen" class="screen">
+            <div class="completion-container">
+                <h2>評価完了</h2>
+                <p>すべての音刺激の評価が完了しました。</p>
+                <p>結果をExcelで出力します...</p>
+                <div id="completionMessage" class="completion-message"></div>
+            </div>
         </div>
-      </div>
 
-      <!-- Audio element -->
-      <audio id="audioPlayer" preload="none"></audio>
+        <!-- Exit Screen -->
+        <div id="exitScreen" class="screen">
+            <div class="completion-container">
+                <h2>実験を終了しました</h2>
+                <p id="exitMessage">実験が途中で終了されました。</p>
+                <button id="restartButton" class="btn btn-primary" onclick="restartExperiment()" style="margin-top: 20px;">最初に戻る</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-  </body>
+</body>
 </html>
